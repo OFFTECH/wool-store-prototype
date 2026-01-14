@@ -1,0 +1,95 @@
+{
+    "en": {
+        "nav": {
+            "shop_all": "Shop All",
+            "new_arrivals": "New Arrivals",
+            "kits": "Kits",
+            "our_story": "Our Story"
+        },
+        "hero": {
+            "title": "Sustainable Wool for Slow Living",
+            "subtitle": "Curated fibers from Norway and Poland. Ethically sourced, naturally beautiful.",
+            "cta_no": "Shop Norway",
+            "cta_pl": "Shop Poland"
+        },
+        "featured": {
+            "title": "Featured Wool",
+            "products": {
+                "merino": {
+                    "title": "Merino Extra Fine",
+                    "desc": "100% Virgin Wool"
+                },
+                "tradition": {
+                    "title": "Norwegian Tradition",
+                    "desc": "Heritage Highland Wool"
+                },
+                "alpaca": {
+                    "title": "Alpaca Soft Blend",
+                    "desc": "70% Alpaca, 30% Silk"
+                }
+            }
+        }
+    },
+    "no": {
+        "nav": {
+            "shop_all": "Se alle",
+            "new_arrivals": "Nyheter",
+            "kits": "Strikkepakker",
+            "our_story": "Vår historie"
+        },
+        "hero": {
+            "title": "Bærekraftig ull for et saktere liv",
+            "subtitle": "Utvalgte fibre fra Norge og Polen. Etisk handlet, naturlig vakkert.",
+            "cta_no": "Handle Norge",
+            "cta_pl": "Handle Polen"
+        },
+        "featured": {
+            "title": "Utvalgt Ull",
+            "products": {
+                "merino": {
+                    "title": "Merino Extra Fine",
+                    "desc": "100% Ren Ny Ull"
+                },
+                "tradition": {
+                    "title": "Norsk Tradisjon",
+                    "desc": "Arv fra det norske høyfjellet"
+                },
+                "alpaca": {
+                    "title": "Alpaca Soft Blend",
+                    "desc": "70% Alpakka, 30% Silke"
+                }
+            }
+        }
+    },
+    "pl": {
+        "nav": {
+            "shop_all": "Wszystkie",
+            "new_arrivals": "Nowości",
+            "kits": "Zestawy",
+            "our_story": "Nasza historia"
+        },
+        "hero": {
+            "title": "Zrównoważona wełna dla świadomego życia",
+            "subtitle": "Starannie dobrane włókna z Norwegii i Polski. Etycznie pozyskane, naturalnie piękne.",
+            "cta_no": "Sklep Norwegia",
+            "cta_pl": "Sklep Polska"
+        },
+        "featured": {
+            "title": "Polecane Wełny",
+            "products": {
+                "merino": {
+                    "title": "Merino Extra Fine",
+                    "desc": "100% żywa wełna"
+                },
+                "tradition": {
+                    "title": "Norweska Tradycja",
+                    "desc": "Tradycyjna wełna wysokogórska"
+                },
+                "alpaca": {
+                    "title": "Mieszanka Alpaki",
+                    "desc": "70% Alpaka, 30% Jedwab"
+                }
+            }
+        }
+    }
+}
