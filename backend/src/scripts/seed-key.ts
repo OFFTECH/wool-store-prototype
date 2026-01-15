@@ -17,6 +17,7 @@ export default async function seedApiKey({ container }: ExecArgs) {
         {
           title: "Storefront Key",
           type: "publishable",
+          created_by: "seed",
         },
       ],
     },
