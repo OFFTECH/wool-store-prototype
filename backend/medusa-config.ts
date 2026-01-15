@@ -11,6 +11,14 @@ module.exports = defineConfig({
       authCors: process.env.AUTH_CORS!,
       jwtSecret: process.env.JWT_SECRET || "supersecret",
       cookieSecret: process.env.COOKIE_SECRET || "supersecret",
-    }
+    },
+    databaseDriverOptions: process.env.NODE_ENV === "production" ? {
+      connection: {
+        ssl: {
+          rejectUnauthorized: false,
+        },
+      },
+      client: 'pg',
+    } : undefined,
   }
 })
