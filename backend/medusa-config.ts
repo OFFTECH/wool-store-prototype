@@ -6,10 +6,19 @@ loadEnv(process.env.NODE_ENV || 'development', process.cwd())
 console.log("--- MEDUSA CONFIG DEBUG ---");
 console.log(`NODE_ENV: ${process.env.NODE_ENV}`);
 console.log(`Region: ${process.env.VmRegion || "Unknown"}`); // Render sets this
-const dbUrl = process.env.DATABASE_URL;
+let dbUrl = process.env.DATABASE_URL;
+
 if (dbUrl) {
+  // Ensure SSL is used for Supabase connections if not already present
+  if (dbUrl.includes("supabase.co") && !dbUrl.includes("sslmode=")) {
+    const separator = dbUrl.includes("?") ? "&" : "?";
+    dbUrl = `${dbUrl}${separator}sslmode=no-verify`;
+    console.log("Appended sslmode=no-verify to DATABASE_URL for Supabase");
+  }
+
   const isSsl = dbUrl.includes('sslmode');
   console.log(`Database URL found. SSL param present: ${isSsl}`);
+  
   // Log host for verification (safely)
   try {
     const url = new URL(dbUrl);
@@ -25,7 +34,7 @@ console.log("---------------------------");
 
 module.exports = defineConfig({
   projectConfig: {
-    databaseUrl: process.env.DATABASE_URL,
+    databaseUrl: dbUrl,
     http: {
       storeCors: process.env.STORE_CORS!,
       adminCors: process.env.ADMIN_CORS!,
@@ -42,11 +51,11 @@ module.exports = defineConfig({
       client: 'pg',
       // Robust pool settings for cloud environments
       pool: {
-        min: 2,
+        min: 0, // Allow 0 connections initially to prevent startup crash
         max: 10,
         acquireTimeoutMillis: 60000, 
         idleTimeoutMillis: 30000,
-        propagateCreateError: false // Prevent crash on initial connection failure
+        propagateCreateError: false 
       }
     },
   }
