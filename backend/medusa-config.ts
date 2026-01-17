@@ -2,39 +2,9 @@ import { loadEnv, defineConfig } from '@medusajs/framework/utils'
 
 loadEnv(process.env.NODE_ENV || 'development', process.cwd())
 
-// Debug logging to verify environment in Render logs
-console.log("--- MEDUSA CONFIG DEBUG ---");
-console.log(`NODE_ENV: ${process.env.NODE_ENV}`);
-console.log(`Region: ${process.env.VmRegion || "Unknown"}`); // Render sets this
-let dbUrl = process.env.DATABASE_URL;
-
-if (dbUrl) {
-  // Ensure SSL is used for Supabase connections if not already present
-  if (dbUrl.includes("supabase.co") && !dbUrl.includes("sslmode=")) {
-    const separator = dbUrl.includes("?") ? "&" : "?";
-    dbUrl = `${dbUrl}${separator}sslmode=no-verify`;
-    console.log("Appended sslmode=no-verify to DATABASE_URL for Supabase");
-  }
-
-  const isSsl = dbUrl.includes('sslmode');
-  console.log(`Database URL found. SSL param present: ${isSsl}`);
-  
-  // Log host for verification (safely)
-  try {
-    const url = new URL(dbUrl);
-    console.log(`DB Host: ${url.hostname}`);
-    console.log(`DB Port: ${url.port}`);
-  } catch (e) {
-    console.log("Could not parse DATABASE_URL");
-  }
-} else {
-  console.error("CRITICAL: DATABASE_URL is missing!");
-}
-console.log("---------------------------");
-
 module.exports = defineConfig({
   projectConfig: {
-    databaseUrl: dbUrl,
+    databaseUrl: process.env.DATABASE_URL,
     http: {
       storeCors: process.env.STORE_CORS!,
       adminCors: process.env.ADMIN_CORS!,
@@ -44,19 +14,11 @@ module.exports = defineConfig({
     },
     databaseDriverOptions: {
       connection: {
-        ssl: {
-          rejectUnauthorized: false,
-        },
+        ssl: (process.env.NODE_ENV === "production" || process.env.DATABASE_URL?.includes("supabase")) 
+          ? { rejectUnauthorized: false } 
+          : false,
       },
       client: 'pg',
-      // Robust pool settings for cloud environments
-      pool: {
-        min: 0, // Allow 0 connections initially to prevent startup crash
-        max: 10,
-        acquireTimeoutMillis: 60000, 
-        idleTimeoutMillis: 30000,
-        propagateCreateError: false 
-      }
     },
   }
 })
